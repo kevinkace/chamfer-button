@@ -1,0 +1,47 @@
+
+.button {
+    position: relative;
+    padding: 1.2em 1.8em;
+    margin: 0;
+
+    border: none;
+    color: inherit;
+    background: none;
+
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        outline: none;
+
+        polygon {
+            stroke-dasharray: var(--dasharray);
+            animation: forwards infinite linear dar var(--durr);
+        }
+    }
+
+    + .button {
+        margin-left: 2em;
+    }
+}
+
+.border {
+    top: 0;
+    left: 0;
+    position: absolute;
+
+    polygon {
+        fill: hsla(210, 40%, 90%, 10%);
+        stroke: hsl(210, 90%, 60%);
+        stroke-width: 2px;
+    }
+}
+
+@keyframes dar {
+    0% {
+        stroke-dashoffset: var(--length);
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}

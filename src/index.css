@@ -1,0 +1,19 @@
+body {
+    padding: 3em;
+
+    color: white;
+    background: hsl(210, 19%, 10%);
+}
+
+h1 {
+    margin-bottom: 1em;
+    font-size: 2em;
+    line-height: 1.2;
+    text-align: center;
+}
+
+#mount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
