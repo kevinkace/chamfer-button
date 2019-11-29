@@ -2,18 +2,17 @@ import React from "react";
 
 import css from "./Button.css";
 
-export default function Border({ width, height, id }) {
+export default function Border({ width, height, id, chamfer = 10 }) {
     const w = Math.floor(width);
     const h = Math.floor(height);
 
-    const cham = 10;
     const x = {
-        max: w - 1,
-        maxC: w - 1 - cham
+        max  : w - 1,
+        maxC : w - 1 - chamfer
     };
     const y = {
-        max: h - 1,
-        maxC: h - 1 - cham
+        max  : h - 1,
+        maxC : h - 1 - chamfer
     };
 
     const length = Math.floor(
@@ -22,11 +21,11 @@ export default function Border({ width, height, id }) {
         // 2 sides
         2 * (y.maxC - 1) +
         // 2 angles
-        2 * Math.sqrt(2 * Math.pow(cham, 2))
+        2 * Math.sqrt(2 * Math.pow(chamfer, 2))
     );
 
     const points = `${x.max} ${y.maxC} ${x.maxC} ${y.max} 1 ${y.max} 1 ${1 +
-        cham} ${1 + cham} 1 ${x.max} 1 ${x.max} ${y.maxC}`;
+        chamfer} ${1 + chamfer} 1 ${x.max} 1 ${x.max} ${y.maxC}`;
 
     const style = `#${id} { --length: ${length}; --dasharray: ${length / 4}; --durr: ${length * 0.8 + 400}ms; }`;
 

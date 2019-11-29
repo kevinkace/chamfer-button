@@ -8,7 +8,7 @@ import css from "./index.css";
 class Comp extends React.Component {
     render() {
         return (
-            <Button>click</Button>
+            <Button chamfer={14} corners={[true, true, true, true]}>click</Button>
         );
     }
 }
