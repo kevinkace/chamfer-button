@@ -2,44 +2,84 @@ import React from "react";
 
 import css from "./Button.css";
 
-export default function Border({ width, height, id, chamfer = 10 }) {
+import distance         from "./lib/distance";
+import oR               from "./lib/objectReduce";
+import addV             from "./lib/addVertices";
+import normalizeChamfer from "./lib/normalizeChamfer"
+
+const defaultChamfer = 10;
+
+export default function Border({ width, height, id, chamfer = defaultChamfer }) {
     const w = Math.floor(width);
     const h = Math.floor(height);
 
-    const x = {
-        max  : w - 1,
-        maxC : w - 1 - chamfer
+    if (!w || !h) {
+        return "";
+    }
+
+    chamfer = normalizeChamfer(chamfer);
+
+    const offset = 1;
+    const corners = {
+        lt : [ offset, offset ],
+        tr : [ w - offset, offset ],
+        rb : [ w - offset, h - offset ],
+        bl : [ offset, h - offset ]
     };
-    const y = {
-        max  : h - 1,
-        maxC : h - 1 - chamfer
+
+    const vertices = {
+        t0 : addV(corners.lt, [ chamfer[0], 0 ]),
+        t1 : addV(corners.tr, [ -chamfer[1], 0 ]),
+        r0 : addV(corners.tr, [ 0, chamfer[1] ]),
+        r1 : addV(corners.rb, [ 0, -chamfer[2] ]),
+        b0 : addV(corners.rb, [ -chamfer[2], 0 ]),
+        b1 : addV(corners.bl, [ chamfer[3], 0 ]),
+        l0 : addV(corners.bl, [ 0, -chamfer[3] ]),
+        l1 : addV(corners.lt, [ 0, chamfer[0] ])
     };
 
-    const length = Math.floor(
-        // 2 tops
-        2 * (x.maxC - 1) +
-        // 2 sides
-        2 * (y.maxC - 1) +
-        // 2 angles
-        2 * Math.sqrt(2 * Math.pow(chamfer, 2))
-    );
+    const points = oR(vertices, (acc, { value }) =>
+        acc + ` ${value[0]} ${value[1]}`,
+    "");
 
-    const points = `${x.max} ${y.maxC} ${x.maxC} ${y.max} 1 ${y.max} 1 ${1 +
-        chamfer} ${1 + chamfer} 1 ${x.max} 1 ${x.max} ${y.maxC}`;
 
-    const style = `#${id} { --length: ${length}; --dasharray: ${length / 4}; --durr: ${length * 0.8 + 400}ms; }`;
+    console.log(vertices);
 
-    return w && h ?
-        <svg
-            className={css.border}
-            id={id}
-            viewBox={`0 0 ${w} ${h}`}
-            width={w}
-            height={h}
-        >
-            <style>{style}</style>
 
-            <polygon points={points} />
-        </svg> :
-        "";
+    const { length } = oR(vertices, (acc, { value }, idx) => {
+        console.log("p", acc.prev, "v", value);
+        if (!idx) {
+            acc.prev = value;
+
+            return acc;
+        }
+
+        const d = distance(acc.prev, value);
+
+        console.log("l", acc.length);
+        console.log("d", d);
+
+        acc.length += d;
+
+        console.log("l", acc.length);
+        acc.prev = value;
+
+        return acc;
+    }, { length : 0 });
+
+    console.log(length);
+
+    const style = `#${id} { --length: ${length}; --dasharray: ${length / 2}; --durr: ${length * 10}ms; }`;
+
+    return <svg
+        className={css.border}
+        id={id}
+        viewBox={`0 0 ${w} ${h}`}
+        width={w}
+        height={h}
+    >
+        <style>{style}</style>
+
+        <polygon points={points} />
+    </svg>;
 }
