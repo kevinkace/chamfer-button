@@ -6,10 +6,12 @@ import distance         from "./lib/distance";
 import oR               from "./lib/objectReduce";
 import addV             from "./lib/addVertices";
 import normalizeChamfer from "./lib/normalizeChamfer"
+import perimeter from "./lib/perimeter";
 
 const defaultChamfer = 10;
+const defaultHoverCount = 2;
 
-export default function Border({ width, height, id, chamfer = defaultChamfer }) {
+export default function Border({ width, height, id, chamfer = defaultChamfer, hoverCount = 2 }) {
     const w = Math.floor(width);
     const h = Math.floor(height);
 
@@ -45,31 +47,11 @@ export default function Border({ width, height, id, chamfer = defaultChamfer }) 
 
     console.log(vertices);
 
-
-    const { length } = oR(vertices, (acc, { value }, idx) => {
-        console.log("p", acc.prev, "v", value);
-        if (!idx) {
-            acc.prev = value;
-
-            return acc;
-        }
-
-        const d = distance(acc.prev, value);
-
-        console.log("l", acc.length);
-        console.log("d", d);
-
-        acc.length += d;
-
-        console.log("l", acc.length);
-        acc.prev = value;
-
-        return acc;
-    }, { length : 0 });
+    const length = perimeter(Object.values(vertices));
 
     console.log(length);
 
-    const style = `#${id} { --length: ${length}; --dasharray: ${length / 2}; --durr: ${length * 10}ms; }`;
+    const style = `#${id} { --length: ${length}; --dasharray: ${length / (hoverCount * 2)}; --durr: ${800}ms; }`;
 
     return <svg
         className={css.border}

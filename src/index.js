@@ -8,7 +8,7 @@ import css from "./index.css";
 class Comp extends React.Component {
     render() {
         return (
-            <Button chamfer={[ 12, 2 ]}>click</Button>
+            <Button chamfer={[ 0, 12 ]} hoverCount={2}>click</Button>
         );
     }
 }

@@ -37,6 +37,7 @@
     }
 }
 
+/* animate the length of the border */
 @keyframes dar {
     0% {
         stroke-dashoffset: var(--length);
