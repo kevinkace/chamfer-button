@@ -9,7 +9,7 @@ class Comp extends React.Component {
     render() {
         return (
             <div>
-                <Button chamfer={[ 0, 12 ]} hoverCount={3} hoverSpeed={800} borderWidth={2}>
+                <Button chamfer={[ 12, 0 ]} hoverCount={3} hoverSpeed={800} borderWidth={2}>
                     Hover on This
                 </Button>
                 <p>- or focus -</p>
