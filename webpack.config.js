@@ -38,7 +38,7 @@ module.exports = {
             template : "./src/index.ejs",
             filename : "./index.html",
 
-            title : "website title"
+            title : "SVG Chamfer Button"
         })
     ]
 };

@@ -1,7 +1,7 @@
 
 .button {
     position: relative;
-    padding: 1.2em 1.8em;
+    padding: 1.25em 1.8em 1.2em;
     margin: 0;
 
     border: none;
@@ -16,7 +16,7 @@
 
         polygon {
             stroke-dasharray: var(--dasharray);
-            animation: forwards infinite linear dar var(--durr);
+            animation: forwards infinite linear dar var(--duration);
         }
     }
 
@@ -33,7 +33,7 @@
     polygon {
         fill: hsla(210, 40%, 90%, 10%);
         stroke: hsl(210, 90%, 60%);
-        stroke-width: 2px;
+        stroke-width: var(--borderWidth);
     }
 }
 
