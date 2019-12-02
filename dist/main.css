@@ -1,0 +1,83 @@
+/* src/Button.css */
+.mc3df27620_button {
+    position: relative;
+    padding: 1.25em 1.8em 1.2em;
+    margin: 0;
+
+    border: none;
+    color: inherit;
+    background: none;
+
+    cursor: pointer;
+}
+
+    .mc3df27620_button:hover,
+    .mc3df27620_button:focus {
+        outline: none;
+    }
+
+    .mc3df27620_button:hover polygon, .mc3df27620_button:focus polygon {
+            stroke-dasharray: var(--dasharray);
+            animation: forwards infinite linear mc3df27620_dar var(--duration);
+        }
+
+    .mc3df27620_button + .mc3df27620_button {
+        margin-left: 2em;
+    }
+
+.mc3df27620_border {
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.mc3df27620_border polygon {
+        fill: hsla(210, 40%, 90%, 10%);
+        stroke: hsl(210, 90%, 60%);
+        stroke-width: var(--borderWidth);
+    }
+
+/* animate the length of the border */
+@keyframes mc3df27620_dar {
+    0% {
+        stroke-dashoffset: var(--length);
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+/* src/index.css */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    color: white;
+    background: hsl(210, 19%, 10%);
+}
+h1 {
+    margin-bottom: 1em;
+    font-size: 2em;
+    line-height: 1.2;
+    text-align: center;
+}
+#mount {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+button {
+    font-size: 1em;
+}
+p {
+    opacity: 0.5;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 0.6em;
+    letter-spacing: 2px;
+}
