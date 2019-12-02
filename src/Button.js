@@ -27,7 +27,7 @@ export default function Button({ children, ...props }) {
             }}
         >
             {children}
-            <Border height={height} width={width} id={children.split(" ")[0]} {...props} />
+            <Border height={height} width={width} {...props} />
         </button>
     );
 }
