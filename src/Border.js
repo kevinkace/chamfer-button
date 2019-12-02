@@ -12,11 +12,11 @@ const defaults = {
     hoverCount  : 2,
     hoverSpeed  : 800,
     borderWidth : 2
-}
+};
 
 export default function Border(props) {
     const {
-        width, height, id,
+        width, height,
 
         chamfer     = defaults.chamfer,
         borderWidth = defaults.borderWidth,
@@ -27,6 +27,7 @@ export default function Border(props) {
     // nearest pixel
     const w = Math.floor(width);
     const h = Math.floor(height);
+    const id = `w${w}h${h}`;
 
     if (!w || !h) {
         return "";
