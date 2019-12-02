@@ -2,7 +2,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CSSPlugin         = require("@modular-css/webpack/plugin");
 
 module.exports = {
-    // externals : { react : "React" },
+    // externals: {
+    //     react       : "react",
+    //     "react-dom" : "reactDOM"
+    // },
     module : {
         rules : [
             {
