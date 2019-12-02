@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "@modular-css/webpack": "^25.2.0",
+    "@xstate/react": "^0.8.1",
     "babel-loader": "^8.0.6",
     "eslint": "^6.7.1",
     "eslint-config-arenanet": "^4.4.3",
@@ -34,7 +35,8 @@
     "postcss-nested": "^4.2.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "xstate": "^4.7.1"
   },
   "dependencies": {
     "react": "^16.12.0",
